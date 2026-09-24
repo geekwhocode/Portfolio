@@ -118,6 +118,7 @@ h1, h2, h3, h4, h5 {
     padding: 5rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    scroll-margin-top: 6rem;
 }
 
 
@@ -244,7 +245,8 @@ h1, h2, h3, h4, h5 {
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     padding-top: 6rem;
 }
@@ -789,6 +791,71 @@ footer p {
 @keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: var(--primary-blue); }
+}
+
+/* ================= Marquee Section ================= */
+.marquee-glass-wrapper {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.1) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.05), 
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+        0 15px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.marquee-container {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 35s linear infinite;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0 2.5rem;
+    transition: color 0.3s ease;
+}
+
+.marquee-item:hover {
+    color: var(--text-main);
+}
+
+.marquee-icon {
+    font-size: 1.25rem;
+}
+
+@keyframes marquee-scroll {
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 /* ================= Media Queries ================= */

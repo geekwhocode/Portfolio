@@ -72,7 +72,6 @@ h1, h2, h3, h4, h5 {
     overflow: hidden;
     z-index: 1;
     text-align: center;
-    white-space: nowrap;
 }
 
 .btn::before {
@@ -350,7 +349,6 @@ h1, h2, h3, h4, h5 {
 
 .hero-actions {
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 2.5rem;
 }

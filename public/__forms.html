@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Netlify Forms Hidden</title>
+  </head>
+  <body>
+    <!-- 
+      This is a hidden dummy form required for Netlify to detect forms 
+      in a Next.js App Router (especially inside Client Components). 
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="message" />
+    </form>
+  </body>
+</html>

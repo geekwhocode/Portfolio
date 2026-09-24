@@ -60,7 +60,9 @@ h1, h2, h3, h4, h5 {
 
 /* ================= Components ================= */
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;

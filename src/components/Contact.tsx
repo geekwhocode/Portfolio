@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus("idle");
+    setErrorMsg("");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -30,9 +32,14 @@ export default function Contact() {
         form.reset();
         setTimeout(() => setSubmitStatus("idle"), 5000);
       } else {
+        const text = await response.text();
+        console.error("Netlify form error:", response.status, response.statusText, text);
+        setErrorMsg(`${response.status} ${response.statusText}`);
         setSubmitStatus("error");
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Network error:", error);
+      setErrorMsg(error.message || "Network Error");
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -139,7 +146,7 @@ export default function Contact() {
                     {isSubmitting ? "Sending..." : "Get in touch"}
                   </button>
                   {submitStatus === "success" && <span className="text-green-400 text-sm font-medium">Message sent successfully!</span>}
-                  {submitStatus === "error" && <span className="text-red-400 text-sm font-medium">Oops, something went wrong.</span>}
+                  {submitStatus === "error" && <span className="text-red-400 text-sm font-medium">Error: {errorMsg}</span>}
                 </div>
               </form>
             </div>

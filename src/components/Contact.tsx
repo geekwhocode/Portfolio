@@ -13,18 +13,13 @@ export default function Contact() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const data = new URLSearchParams();
-    
-    // Convert FormData to URLSearchParams
-    formData.forEach((value, key) => {
-      data.append(key, value.toString());
-    });
+    const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("/favicon.ico", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: data.toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
@@ -75,12 +70,7 @@ export default function Contact() {
                 Got a question or need some help? Drop me a message, and I'll get back to you within 2 hours. I'm here to ensure you get the support you need!
               </p>
 
-              <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <input type="hidden" name="form-name" value="contact" />
-                <p className="hidden" style={{ display: 'none' }}>
-                  <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                </p>
-                
+              <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {/* Row 1: Name */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                   <div className="relative">
